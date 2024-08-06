@@ -1,7 +1,5 @@
 /// <reference path="types/phaser.d.ts" />
 
-const threshold = 200;
-
 class Scene2 extends Phaser.Scene {
     constructor() {
         super("playGame");
@@ -9,7 +7,8 @@ class Scene2 extends Phaser.Scene {
 
     create() {
         this.score = 0;
-
+        this.threshold = 200;
+        
         this.origin = this.add.image(0, 0, 'touchOrigin'); // create touchpad assets
         this.current = this.add.image(0, 0, 'touchCurrent');
         this.origin.setScale(10);
@@ -274,11 +273,11 @@ class Scene2 extends Phaser.Scene {
             this.current.setPosition(this.input.pointer1.x, this.input.pointer1.y); 
             this.angle = Math.trunc(this.input.pointer1.getAngle() * 180/Math.PI); // get data
             this.distance = Math.trunc(this.input.pointer1.getDistance());
-            this.distance = Phaser.Math.Clamp(this.distance, 0, threshold);
-            this.force = Math.trunc(this.distance / threshold*100);
+            this.distance = Phaser.Math.Clamp(this.distance, 0, this.threshold);
+            this.force = Math.trunc(this.distance / this.threshold*100);
     
-              if (this.distance == threshold) { // limit distance of current visually
-                Phaser.Math.RotateAroundDistance(this.current, this.origin.x, this.origin.y, 0, threshold);
+              if (this.distance == this.threshold) { // limit distance of current visually
+                Phaser.Math.RotateAroundDistance(this.current, this.origin.x, this.origin.y, 0, this.threshold);
               }// end if (this.distance
     
           }// end if (this.leftPointer.active...
