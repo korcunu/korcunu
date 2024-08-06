@@ -1,5 +1,7 @@
 /// <reference path="types/phaser.d.ts" />
 
+const threshold = 200;
+
 class Scene2 extends Phaser.Scene {
     constructor() {
         super("playGame");
