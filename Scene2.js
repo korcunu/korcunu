@@ -204,6 +204,7 @@ class Scene2 extends Phaser.Scene {
                 player.y = config.height - 64;
                 player.visible = true;
                 player.setTexture('player'); // Switch back to the 'player' texture
+                this.player.play("thrust");
                 
             }
         }, this);
