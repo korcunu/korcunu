@@ -30,9 +30,9 @@ class Scene2 extends Phaser.Scene {
         this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE " + this.zeroPad(this.score, 3), 16);
 
         // DEBUG SHOWING TOUCH CONTROLS
-        this.angleLabel = this.add.bitmapText(10, 10, "pixelFont", "ANGLE " + this.zeroPad(0, 3), 16);
-        this.forceLabel = this.add.bitmapText(10, 15, "pixelFont", "FORCE " + this.zeroPad(0, 3), 16);
-        this.distanceLabel = this.add.bitmapText(10, 20, "pixelFont", "DISTANCE " + this.zeroPad(0, 3), 16);
+        this.angleLabel = this.add.bitmapText(10, 25, "pixelFont", "ANGLE " + this.zeroPad(0, 3), 16);
+        this.forceLabel = this.add.bitmapText(10, 45, "pixelFont", "FORCE " + this.zeroPad(0, 3), 16);
+        this.distanceLabel = this.add.bitmapText(10, 65, "pixelFont", "DISTANCE " + this.zeroPad(0, 3), 16);
 
         this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.background.setOrigin(0, 0);
