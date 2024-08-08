@@ -299,7 +299,7 @@ class Scene2 extends Phaser.Scene {
           }// end if (!this.movePointer.active...
 
         var angleFormatted = this.zeroPad(this.angle, 3);
-        this.angleLable.text = "ANGLE " + angleFormatted;
+        this.angleLabel.text = "ANGLE " + angleFormatted;
 
         var forceFormatted = this.zeroPad(this.force, 3);
         this.forceLabel.text = "FORCE " + forceFormatted;
