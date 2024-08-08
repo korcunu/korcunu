@@ -234,6 +234,13 @@ class Scene2 extends Phaser.Scene {
         } else if (this.cursorKeys.down.isDown || this.s_key.isDown) {
             this.player.setVelocityY(gameSettings.playerSpeed);
         }
+
+        if (this.input.pointer1.active) {
+            var touch_y = this.distance * Math.sin(this.input.pointer1.getAngle());
+            var touch_x = this.distance * Math.cos(this.input.pointer1.getAngle());
+            this.player.setVelocityX(touch_x);
+            this.player.setVelocityY(touch_y);
+        }
     }
 
     moveShip(ship, speed) {
@@ -267,7 +274,6 @@ class Scene2 extends Phaser.Scene {
 
         this.background.tilePositionY += -.5;
 
-        this.movePlayerManager();
         if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
             this.shootBeam();
         }
@@ -297,6 +303,8 @@ class Scene2 extends Phaser.Scene {
             this.distance = 0;
             this.force = 0;
           }// end if (!this.movePointer.active...
+
+        this.movePlayerManager();
 
         var angleFormatted = this.zeroPad(this.angle, 3);
         this.angleLabel.text = "ANGLE " + angleFormatted;
