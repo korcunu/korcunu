@@ -29,6 +29,11 @@ class Scene2 extends Phaser.Scene {
 
         this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE " + this.zeroPad(this.score, 3), 16);
 
+        // DEBUG SHOWING TOUCH CONTROLS
+        this.angleLabel = this.add.bitmapText(10, 10, "pixelFont", "ANGLE " + this.zeroPad(0, 3), 16);
+        this.forceLabel = this.add.bitmapText(10, 15, "pixelFont", "FORCE " + this.zeroPad(0, 3), 16);
+        this.distanceLabel = this.add.bitmapText(10, 20, "pixelFont", "DISTANCE " + this.zeroPad(0, 3), 16);
+
         this.background = this.add.tileSprite(0, 0, config.width, config.height, "background");
         this.background.setOrigin(0, 0);
 
@@ -266,11 +271,6 @@ class Scene2 extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
             this.shootBeam();
         }
-
-        // DEBUG TOUCH CONTROLS
-        console.log("Angle: " + this.angle);
-        console.log("Force: " + this.force);
-        console.log("Distance: " + this.distance);
         
         if (this.input.pointer1.active) { // handle analog control
             this.origin.alpha = .25; // increase opacity
@@ -298,6 +298,15 @@ class Scene2 extends Phaser.Scene {
             this.force = 0;
           }// end if (!this.movePointer.active...
 
+        var angleFormatted = this.zeroPad(this.angle, 3);
+        this.angleLable.text = "ANGLE " + angleFormatted;
+
+        var forceFormatted = this.zeroPad(this.force, 3);
+        this.forceLabel.text = "FORCE " + forceFormatted;
+
+        var distanceFormatted = this.zeroPad(this.distance, 3);
+        this.distanceLabel.text = "DISTANCE " + distanceFormatted;
+        
         for(var i = 0; i < this.projectiles.getChildren().length; i++){
             var beam = this.projectiles.getChildren()[i];
             beam.update();
