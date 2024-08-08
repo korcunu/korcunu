@@ -11,8 +11,8 @@ class Scene2 extends Phaser.Scene {
         
         this.origin = this.add.image(0, 0, 'touchOrigin'); // create touchpad assets
         this.current = this.add.image(0, 0, 'touchCurrent');
-        this.origin.setScale(10);
-        this.current.setScale(10);
+        this.origin.setScale(5);
+        this.current.setScale(5);
         this.origin.alpha = 0; 
         this.current.alpha = 0;
 
@@ -267,6 +267,11 @@ class Scene2 extends Phaser.Scene {
             this.shootBeam();
         }
 
+        // DEBUG TOUCH CONTROLS
+        console.log("Angle: " + this.angle);
+        console.log("Force: " + this.force);
+        console.log("Distance: " + this.distance);
+        
         if (this.input.pointer1.active) { // handle analog control
             this.origin.alpha = .25; // increase opacity
             this.current.alpha = .25;
