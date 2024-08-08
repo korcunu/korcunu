@@ -7,7 +7,7 @@ class Scene2 extends Phaser.Scene {
 
     create() {
         this.score = 0;
-        this.threshold = 200;
+        this.threshold = 100;
         
         this.origin = this.add.image(0, 0, 'touchOrigin'); // create touchpad assets
         this.current = this.add.image(0, 0, 'touchCurrent');
@@ -236,8 +236,12 @@ class Scene2 extends Phaser.Scene {
         }
 
         if (this.input.pointer1.active) {
-            var touch_y = this.distance * Math.sin(this.input.pointer1.getAngle());
-            var touch_x = this.distance * Math.cos(this.input.pointer1.getAngle());
+            var touch_y = this.distance * Math.sin(this.input.pointer1.getAngle()) * 2;
+            var touch_x = this.distance * Math.cos(this.input.pointer1.getAngle()) * 2;
+
+            if (touch_x > 200) {touch_x = 200;}
+            if (touch_y > 200) {touch_y = 200;}
+            
             this.player.setVelocityX(touch_x);
             this.player.setVelocityY(touch_y);
         }
