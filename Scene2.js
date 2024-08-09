@@ -7,12 +7,12 @@ class Scene2 extends Phaser.Scene {
 
     create() {
         this.score = 0;
-        this.threshold = 100;
+        this.threshold = 30;
         
         this.origin = this.add.image(0, 0, 'touchOrigin'); // create touchpad assets
         this.current = this.add.image(0, 0, 'touchCurrent');
-        this.origin.setScale(5);
-        this.current.setScale(5);
+        this.origin.setScale(3);
+        this.current.setScale(3);
         this.origin.alpha = 0; 
         this.current.alpha = 0;
 
@@ -236,12 +236,13 @@ class Scene2 extends Phaser.Scene {
         }
 
         if (this.input.pointer1.active) {
-            var touch_y = this.distance * Math.sin(this.input.pointer1.getAngle()) * 5;
-            var touch_x = this.distance * Math.cos(this.input.pointer1.getAngle()) * 5;
-
-            if (touch_x > 200) {touch_x = 200;}
-            if (touch_y > 200) {touch_y = 200;}
+            // Speed = distance * sin or cos * force / 10 (and round it to the neareast integer)
+            var touch_y = Math.round(this.distance * Math.sin(this.input.pointer1.getAngle()) * this.force / 10);
+            var touch_x = Math.round(this.distance * Math.cos(this.input.pointer1.getAngle()) * this.force / 10);
             
+            touch_x = Math.max(-200, Math.min(200, touch_x));
+            touch_y = Math.max(-200, Math.min(200, touch_y));
+
             this.player.setVelocityX(touch_x);
             this.player.setVelocityY(touch_y);
         }
@@ -283,8 +284,8 @@ class Scene2 extends Phaser.Scene {
         }
         
         if (this.input.pointer1.active) { // handle analog control
-            this.origin.alpha = .25; // increase opacity
-            this.current.alpha = .25;
+            this.origin.alpha = .33; // increase opacity
+            this.current.alpha = .33;
             this.origin.setPosition(this.input.pointer1.downX, this.input.pointer1.downY); // assign coordinates
             this.current.setPosition(this.input.pointer1.x, this.input.pointer1.y); 
             this.angle = Math.trunc(this.input.pointer1.getAngle() * 180/Math.PI); // get data
