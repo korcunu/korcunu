@@ -7,6 +7,7 @@ class Scene1 extends Phaser.Scene {
 
         this.load.image('touchOrigin', 'assets/images/touchpad.png'); // load touchpad assets
         this.load.image('touchCurrent', 'assets/images/touchpad.png');
+        this.load.image('fireButton', 'assets/images/touchpad.png');
 
         this.load.image("background", "assets/images/BackgroundStars.png");
         this.load.spritesheet("ship1", "assets/spritesheets/ship1.png", {
