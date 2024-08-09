@@ -16,6 +16,14 @@ class Scene2 extends Phaser.Scene {
         this.origin.alpha = 0; 
         this.current.alpha = 0;
 
+        // Create fire button
+        this.fireButtonX = 304;
+        this.fireButtonY = 584;
+        this.isFireButtonActive = false;
+        this.fireButton = this.add.image(this.fireButtonX, this.fireButtonY, 'fireButton');
+        this.fireButton.setScale(3);
+        this.fireButton.alpha = 0.5;
+
         var graphics = this.add.graphics();
         graphics.fillStyle(0x000000, 1);
         graphics.beginPath();
@@ -284,19 +292,28 @@ class Scene2 extends Phaser.Scene {
         }
         
         if (this.input.pointer1.active) { // handle analog control
-            this.origin.alpha = .33; // increase opacity
-            this.current.alpha = .33;
-            this.origin.setPosition(this.input.pointer1.downX, this.input.pointer1.downY); // assign coordinates
-            this.current.setPosition(this.input.pointer1.x, this.input.pointer1.y); 
-            this.angle = Math.trunc(this.input.pointer1.getAngle() * 180/Math.PI); // get data
-            this.distance = Math.trunc(this.input.pointer1.getDistance());
-            this.distance = Phaser.Math.Clamp(this.distance, 0, this.threshold);
-            this.force = Math.trunc(this.distance / this.threshold*100);
-    
-              if (this.distance == this.threshold) { // limit distance of current visually
-                Phaser.Math.RotateAroundDistance(this.current, this.origin.x, this.origin.y, 0, this.threshold);
-              }// end if (this.distance
-    
+            // Check if fire button is pressed
+            if (this.input.pointer1.x > this.fireButtonX - 40 && 
+                this.input.pointer1.x < this.fireButtonX + 40 &&
+                this.input.pointer1.y > this.fireButtonY - 40 &&
+                this.input.pointer1.y < this.fireButtonY + 40) {
+                    this.fireButton.alpha = 1;
+                    this.shootBeam();
+                    this.isFireButtonActive = true;
+            } else {
+                this.origin.alpha = .33; // increase opacity
+                this.current.alpha = .33;
+                this.origin.setPosition(this.input.pointer1.downX, this.input.pointer1.downY); // assign coordinates
+                this.current.setPosition(this.input.pointer1.x, this.input.pointer1.y); 
+                this.angle = Math.trunc(this.input.pointer1.getAngle() * 180/Math.PI); // get data
+                this.distance = Math.trunc(this.input.pointer1.getDistance());
+                this.distance = Phaser.Math.Clamp(this.distance, 0, this.threshold);
+                this.force = Math.trunc(this.distance / this.threshold*100);
+        
+                  if (this.distance == this.threshold) { // limit distance of current visually
+                    Phaser.Math.RotateAroundDistance(this.current, this.origin.x, this.origin.y, 0, this.threshold);
+                  }// end if (this.distance
+              }
           }// end if (this.leftPointer.active...
     
           if (!this.input.pointer1.active) { // handle analog control end
@@ -307,6 +324,9 @@ class Scene2 extends Phaser.Scene {
             this.angle = 0; // get data
             this.distance = 0;
             this.force = 0;
+
+            this.fireButton.alpha = 0.5;
+            this.isFireButtonActive = false;
           }// end if (!this.movePointer.active...
 
         this.movePlayerManager();
