@@ -296,7 +296,8 @@ class Scene2 extends Phaser.Scene {
             if (this.input.pointer1.x > this.fireButtonX - 40 && 
                 this.input.pointer1.x < this.fireButtonX + 40 &&
                 this.input.pointer1.y > this.fireButtonY - 40 &&
-                this.input.pointer1.y < this.fireButtonY + 40) {
+                this.input.pointer1.y < this.fireButtonY + 40 &&
+                !this.isFireButtonActive) {
                     this.fireButton.alpha = 1;
                     this.shootBeam();
                     this.isFireButtonActive = true;
