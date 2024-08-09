@@ -4,6 +4,7 @@ var config = {
     backgroundColor: 0x000000,
     scene: [Scene1, Scene2],
     pixelArt: true,
+    activePointers: 3,
     physics: {
         default: "arcade",
         arcade: {
