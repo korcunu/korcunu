@@ -1,6 +1,6 @@
 var config = {
     width: 360,
-    height: 360,
+    height: 640,
     backgroundColor: 0x000000,
     scene: [Scene1, Scene2],
     pixelArt: true,
