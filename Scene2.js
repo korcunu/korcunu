@@ -8,6 +8,9 @@ class Scene2 extends Phaser.Scene {
     create() {
         this.score = 0;
         this.threshold = 30;
+
+        // Allow 2+ screen presses
+        this.input.addPointer(3);
         
         this.origin = this.add.image(0, 0, 'touchOrigin'); // create touchpad assets
         this.current = this.add.image(0, 0, 'touchCurrent');
